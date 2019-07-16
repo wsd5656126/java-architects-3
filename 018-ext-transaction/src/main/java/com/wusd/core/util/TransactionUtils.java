@@ -27,6 +27,7 @@ public class TransactionUtils {
     }
 
     public void rollback() {
-        transactionManager.rollback(transactionStatus);
+        if (transactionStatus != null)
+            transactionManager.rollback(transactionStatus);
     }
 }
