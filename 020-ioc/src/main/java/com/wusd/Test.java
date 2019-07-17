@@ -6,7 +6,7 @@ import com.wusd.service.impl.UserServiceImpl;
 
 public class Test {
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("com.wusd.service");
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("com.wusd");
         UserService userService = (UserServiceImpl) applicationContext.getBean("userServiceImpl");
         userService.add();
     }
