@@ -1,6 +1,6 @@
 package com.wusd.core.aspect;
 
-import com.wusd.core.annotation.ExtTransaction;
+import com.wusd.annotation.ExtTransaction;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 import com.wusd.core.util.TransactionUtils;
 import org.springframework.transaction.TransactionStatus;
 
-import javax.print.attribute.standard.NumberUp;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 @Aspect

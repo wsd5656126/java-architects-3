@@ -7,6 +7,7 @@
     <modules>
         <module>018-ext-transaction</module>
         <module>000-entity</module>
+        <module>020-ioc</module>
     </modules>
     <groupId>com.wusd</groupId>
     <version>1.0-SNAPSHOT</version>
