@@ -1,15 +1,14 @@
 package com.wusd.util;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.File;
 import java.io.FileFilter;
-import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 
 public class ClassUtils {
     public static List<Class<?>> getClazzesByPackage(String packageName) {
@@ -112,28 +111,13 @@ public class ClassUtils {
         }
 
     }
+
+    public static String firstLetterToLowerCase(String name) {
+        if (StringUtils.isNotEmpty(name)) {
+            name = name.substring(0, 1).toLowerCase() + name.substring(1, name.length());
+        }
+        return name;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
