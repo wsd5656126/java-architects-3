@@ -12,31 +12,22 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class ClassUtils {
-    public static List<Class<?>> getClasses(String packageName) {
-        //第一个class类的集合
-        List<Class<?>> classes = new ArrayList<>();
-        //是否循环迭代
-        boolean recursive = true;
-        //获取包的名字 并进行替换
+    public static List<Class<?>> getClazzesByPackage(String packageName) {
+        List<Class<?>> clazzes = new ArrayList<>();
         String packageDirName = packageName.replace('.', '/');
-        //定义一个枚举的集合 并进行循环来处理这个目录下的things
-        Enumeration<URL> dirs;
+        boolean recursive = true;
+        Enumeration<URL> urlEnumeration;
         try {
-            dirs = Thread.currentThread().getContextClassLoader().getResources(packageDirName);
-            //循环迭代下去
-            while (dirs.hasMoreElements()) {
-                //获取下一个元素
-                URL url = dirs.nextElement();
-                //得到协议的名称
+            urlEnumeration = Thread.currentThread().getContextClassLoader().getResources(packageDirName);
+            while (urlEnumeration.hasMoreElements()) {
+                URL url = urlEnumeration.nextElement();
+                //协议
                 String protocol = url.getProtocol();
-                //如果是以文件的形式保存在服务器上
                 if ("file".equals(protocol)) {
-                    //获取包的物理路径
-                    String filePath = URLDecoder.decode(url.getFile(), "UTF-8");
-                    //以文件的方式扫描整个包下的文件 并添加到集合中
-                    findAndAddClassesInPackageByFile(packageName, filePath, recursive, classes);
-
-                } else if ("jar".equals(protocol)) {
+                    String packagePath = URLDecoder.decode(url.getFile(), "UTF-8");
+                    findAndAddClassesInPackageByFile(packageName, packagePath, recursive, clazzes);
+                }
+                /*else if ("jar".equals(protocol)) {
                     //如果是jar包文件
                     //定义一个JarFile
                     JarFile jar;
@@ -70,7 +61,7 @@ public class ClassUtils {
                                         //去掉后面的.class 获取真正的类名
                                         String className = name.substring(packageName.length() + 1, name.length() - 6);
                                         try {
-                                            classes.add(Class.forName(packageName + "." + className));
+                                            clazzes.add(Class.forName(packageName + "." + className));
                                         } catch (ClassNotFoundException e) {
                                             e.printStackTrace();
                                         }
@@ -81,40 +72,45 @@ public class ClassUtils {
                     } catch (Exception e) {
 
                     }
-                }
+                }*/
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return classes;
+        return clazzes;
     }
 
+    //以文件的形式获取包路径下的所有class
     public static void findAndAddClassesInPackageByFile(String packageName, String packagePath, final boolean recursive,
                                                         List<Class<?>> classes) {
+        //获取这个目录
         File dir = new File(packagePath);
         if (!dir.exists() || !dir.isDirectory()) {
             return;
         }
+        //获取目录下所有文件和文件夹
         File[] dirFiles = dir.listFiles(new FileFilter() {
             @Override
             public boolean accept(File file) {
-                return (recursive && file.isDirectory()) || (file.getName()).endsWith(".class");
+                return (recursive && file.isDirectory()) || file.getName().endsWith(".class");
             }
         });
-        for (File file : dirFiles) {
-            if (file.isDirectory()) {
-                findAndAddClassesInPackageByFile(packageName + "." + file.getName(), file.getAbsolutePath(),
-                       recursive, classes);
+        for (File dirFile : dirFiles) {
+            String dirFileName = dirFile.getName();
+            if (dirFile.isDirectory()) {
+                findAndAddClassesInPackageByFile(packageName + "." + dirFileName,
+                        packagePath + "/" + dirFileName, recursive, classes);
             } else {
-                String className = file.getName().substring(0, file.getName().length() - 6);
+                String className = packageName + "." + dirFileName.substring(0, dirFileName.length() - 6);
                 try {
-                    classes.add(Class.forName(packageName + "." + className));
+                    classes.add(Class.forName(className));
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         }
+
     }
 }
 
