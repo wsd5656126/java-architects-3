@@ -12,6 +12,11 @@
     <groupId>com.wusd</groupId>
     <artifactId>020-ioc</artifactId>
     <dependencies>
+        <dependency>
+            <groupId>com.wusd</groupId>
+            <artifactId>000-entity</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- 引入Spring-AOP等相关Jar -->
         <dependency>
             <groupId>org.springframework</groupId>

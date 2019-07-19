@@ -11,6 +11,13 @@
 
     <groupId>com.wusd</groupId>
     <artifactId>021-jdbc</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
