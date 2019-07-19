@@ -1,6 +1,6 @@
 package com.wusd.core.aspect;
 
-import com.wusd.annotation.ExtTransaction;
+import com.wusd.orm.annotation.ExtTransaction;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;

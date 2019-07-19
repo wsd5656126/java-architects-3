@@ -1,12 +1,11 @@
 package com.wusd.core;
 
-import com.wusd.annotation.ExtService;
+import com.wusd.orm.annotation.ExtService;
 import com.wusd.util.ClassUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;

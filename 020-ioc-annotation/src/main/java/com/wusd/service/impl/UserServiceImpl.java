@@ -1,7 +1,7 @@
 package com.wusd.service.impl;
 
-import com.wusd.annotation.ExtResource;
-import com.wusd.annotation.ExtService;
+import com.wusd.orm.annotation.ExtResource;
+import com.wusd.orm.annotation.ExtService;
 import com.wusd.service.LogService;
 import com.wusd.service.UserService;
 

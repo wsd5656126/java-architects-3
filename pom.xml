@@ -11,6 +11,7 @@
         <module>020-ioc-annotation</module>
         <module>020-springmvc</module>
         <module>021-datasource</module>
+        <module>022-orm</module>
     </modules>
     <groupId>com.wusd</groupId>
     <version>1.0-SNAPSHOT</version>
