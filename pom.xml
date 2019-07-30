@@ -13,6 +13,7 @@
         <module>021-datasource</module>
         <module>022-orm</module>
         <module>023extarraylist</module>
+        <module>023-arraylist</module>
     </modules>
     <groupId>com.wusd</groupId>
     <version>1.0-SNAPSHOT</version>
