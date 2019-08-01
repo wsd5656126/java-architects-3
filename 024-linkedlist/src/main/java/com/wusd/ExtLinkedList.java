@@ -34,6 +34,7 @@ public class ExtLinkedList<E> {
     }
 
     public E get(int index) {
+        validate(index);
         Node<E> resultNode = sentrialNode.next;
         for (int i = 0; i < index; i++) {
             resultNode = resultNode.next;
@@ -52,6 +53,12 @@ public class ExtLinkedList<E> {
 
     public int size() {
         return size;
+    }
+
+    public void validate(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("数组越界");
+        }
     }
 
 }
