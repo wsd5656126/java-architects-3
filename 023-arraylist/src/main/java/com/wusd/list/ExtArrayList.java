@@ -4,30 +4,31 @@ import java.util.Arrays;
 
 public class ExtArrayList<E> implements ExtList<E> {
     private Object[] elementData;
-    private static final int DEFAULT_CAPACITY = 10;
     private int size;
+    private static final int DEFAULT_CAPICITY = 20;
 
-    public ExtArrayList(int initialCapacity) {
-        if (initialCapacity < 0) {
-            throw new IllegalArgumentException("初始容量不能小于0");
+    public ExtArrayList(int INITIAL_CAPICITY) {
+        if (INITIAL_CAPICITY <= 0) {
+            INITIAL_CAPICITY = DEFAULT_CAPICITY;
         }
-        elementData = new Object[initialCapacity];
+        elementData = new Object[INITIAL_CAPICITY];
+        size = 0;
     }
+
     public ExtArrayList() {
-        this(DEFAULT_CAPACITY);
+        this(DEFAULT_CAPICITY);
     }
 
     @Override
     public void add(E e) {
-        ensureExplicitCapactity(size + 1);
+        if (size == elementData.length) {
+            resize();
+        }
         elementData[size++] = e;
     }
 
-    public void add(int index, Object o) {
-        ensureExplicitCapactity(size + 1);
-        System.arraycopy(elementData, index, elementData, index + 1, size - index);
-        elementData[index] = o;
-        size++;
+    private void resize() {
+        elementData = Arrays.copyOf(elementData, size + (size >> 1));
     }
 
     @Override
@@ -37,40 +38,6 @@ public class ExtArrayList<E> implements ExtList<E> {
 
     @Override
     public E get(int index) {
-        rangeCheck(index);
         return (E) elementData[index];
-    }
-
-    public E remove(int index) {
-        E obj = get(index);
-        int numMoved = size - index - 1;
-        if (numMoved > 0)
-            System.arraycopy(elementData, index + 1, elementData, index, numMoved);
-        elementData[--size] = null;
-        return obj;
-    }
-
-    public boolean remove(Object o) {
-        for (int i = 0; i < elementData.length; i++) {
-            Object val = elementData[i];
-            if (val.equals(o)) {
-                remove(i);
-                return true;
-            }
-        }
-        return false;
-    }
-    private void rangeCheck(int index) {
-        if (index >= size)
-            throw new IndexOutOfBoundsException("索引越界");
-    }
-    private void ensureExplicitCapactity(int minCapacity) {
-        if (size == elementData.length) {
-            int oldCapacity = elementData.length;
-            int newCapacity = oldCapacity + (oldCapacity >> 1);
-            if (newCapacity - minCapacity < 0)
-                newCapacity = minCapacity;
-            elementData = Arrays.copyOf(elementData, newCapacity);
-        }
     }
 }
