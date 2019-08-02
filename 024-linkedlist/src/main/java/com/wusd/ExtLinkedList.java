@@ -1,8 +1,9 @@
 package com.wusd;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
-public class ExtLinkedList<E> {
+public class ExtLinkedList<E> implements Iterable<E> {
     public static void main(String[] args) {
 //        LinkedList
         ExtLinkedList<String> linkedList = new ExtLinkedList<>();
@@ -11,6 +12,30 @@ public class ExtLinkedList<E> {
         }
         for (int i = 0; i < 100; i++) {
             System.out.println(i + ":" + linkedList.get(i));
+        }
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new LinkedIterator<>(sentrialNode, size);
+    }
+
+    private static class LinkedIterator<E> implements Iterator<E> {
+        private int size;
+        private Node<E> currentNode;
+        public LinkedIterator(Node sentrialNode, int size) {
+            this.currentNode = sentrialNode;
+            this.size = size;
+        }
+        @Override
+        public boolean hasNext() {
+            return currentNode.next != null;
+        }
+
+        @Override
+        public E next() {
+            currentNode = currentNode.next;
+            return currentNode.element;
         }
     }
 
