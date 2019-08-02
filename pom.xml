@@ -16,6 +16,7 @@
         <module>023-arraylist</module>
         <module>024-linkedlist</module>
         <module>025-map</module>
+        <module>026-jdk-hashmap</module>
     </modules>
     <groupId>com.wusd</groupId>
     <version>1.0-SNAPSHOT</version>
