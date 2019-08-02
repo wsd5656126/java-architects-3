@@ -56,6 +56,7 @@ public class LinkedListMap<K, V> {
     private int bucketIndex(K key) {
         int hashCode = key.hashCode();
         int bucketIndex = hashCode % buckets.length;
+        bucketIndex = bucketIndex < 0 ? -bucketIndex : bucketIndex;
         return bucketIndex;
     }
 
