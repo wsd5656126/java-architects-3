@@ -26,6 +26,7 @@
         <module>029-springboot-jdbc</module>
         <module>029-springboot-multidata</module>
         <module>029-springboot-mybatis</module>
+        <module>032-springboot-actuator</module>
     </modules>
     <groupId>com.wusd</groupId>
     <version>1.0-SNAPSHOT</version>
