@@ -14,35 +14,37 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.wusd.mapper1", sqlSessionFactoryRef = "testSqlSessionFactory")
-public class DataSource1Config {
-    @Bean("testDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.test1")
+@MapperScan(basePackages = "com.wusd.mapper2", sqlSessionFactoryRef = "test2SqlSessionFactory")
+public class DataSource2Config {
+    @Bean("test2DataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.test2")
     public DataSource testDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean("testSqlSessionFactory")
-    public SqlSessionFactory testSqlSessionFactory(@Qualifier("testDataSource") DataSource dataSource)
-            throws Exception {
+    @Bean("test2SqlSessionFactory")
+    public SqlSessionFactory testSqlSessionFactory(
+            @Qualifier("test2DataSource") DataSource dataSource
+    ) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean("testDataSourceTransactionManager")
+    @Bean("test2DataSourceTransactionManager")
     public DataSourceTransactionManager testDataSourceTransactionManager(
-            @Qualifier("testDataSource") DataSource dataSource
+            @Qualifier("test2DataSource") DataSource dataSource
     ) {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource);
         return dataSourceTransactionManager;
     }
 
-    @Bean("testSqlSessionTemplate")
+    @Bean
     public SqlSessionTemplate testSqlSessionTemplate(
-            @Qualifier("test2SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
-        return new SqlSessionTemplate(sqlSessionFactory);
+            @Qualifier("test2SqlSessionFactory") SqlSessionFactory sqlSessionFactory
+    ) {
+        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
+        return sqlSessionTemplate;
     }
-
 }
