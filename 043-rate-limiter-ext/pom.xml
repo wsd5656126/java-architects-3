@@ -10,11 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wusd</groupId>
-    <artifactId>042-rate-limiter</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>../043-rate-limiter-ext</module>
-    </modules>
+    <artifactId>043-rate-limiter-ext</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -24,6 +20,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>25.1-jre</version>
+        </dependency>
+        <!-- springboot 整合AOP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
     </dependencies>
 

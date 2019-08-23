@@ -1,0 +1,16 @@
+spring:
+    redis:
+      host: 192.168.10.55
+      port: 6379
+      password: Wusd123..
+      jedis:
+        pool:
+          max-active: 300
+          max-wait: 5000ms
+          max-idle: 300
+          min-idle: 0
+    datasource:
+      url: jdbc:mysql://localhost:3306/test?useSSL=true
+      username: root
+      password: wusd123..
+      driver-class-name: com.mysql.jdbc.Driver

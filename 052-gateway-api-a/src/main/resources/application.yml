@@ -1,0 +1,9 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: wusd_a
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8100/eureka
